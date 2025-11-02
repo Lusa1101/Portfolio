@@ -1,0 +1,899 @@
+﻿@model IEnumerable<string>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<section class="home">
+    <!--
+    <div class="logo">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Omphulusa Mashau</a>
+    </div>
+    -->
+
+    <div class="home-content">
+        <h1>omphulusa mashau.</h1>
+
+        <h3>aspiring software engineer.</h3>
+
+        <br />
+        <br />
+
+        <h2 class="header-row project-title">who am i?</h2>
+        <div class="">
+            <p>i am endlessly curious. everything fascinates me. </p>
+            <p>tech is my playground — a field where exploration has no limits.</p>
+            <p>i thrive on challenges, obsessed with solving problems until the very end.</p>
+        </div>
+
+        <br>
+
+        <div class="col g-4">
+            <a asp-controller="Projects" asp-action="Index" class="btn1">my projects.</a>
+            <a asp-controller="Resume" asp-action="Index" class="btn1">my resume.</a>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="container">
+            <!--<h2 class="">current tech stack</h2>-->
+
+            <div class="hero-tech-stack">
+                @foreach (var stack in Model)
+                {
+                    <div class="tech-badge">@stack</div>
+                }
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+        </div>
+    </div>
+
+    @* <div class="home-img"> *@
+    @*     <div class="rhombus"> *@
+    @*         <p>0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1</p> *@
+    @*     </div> *@
+    @* </div> *@
+
+
+    <!--<div class="rhombus2"> </div>-->
+</section>
+
+@*
+<!-- Hero Section -->
+<section class="resume-hero">
+
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">Omphulusa <span class="text-gradient">Mashau</span></h1>
+            <h2 class="hero-subtitle">Computer Science Engineer | AI & Robotics Enthusiast</h2>
+            <p class="hero-description">Solving complex problems through innovative technology solutions</p>
+        </div>
+        <div class="hero-contact">
+            <a href="mailto:"omphu.shau@outlook.com" class="contact-link">
+                <i class="bi bi-envelope-fill"></i> Email
+            </a>
+            <a href="tel:0783887879" class="contact-link">
+                <i class="bi bi-phone-fill"></i> 0783887879
+            </a>
+            <div class="contact-link">
+				<i class="bi bi-geo-alt-fill"></i> Polokwane, Limpopo, South Africa
+            </div>
+        </div>
+    </div>
+    <div class="hero-tech-stack">
+        <div class="tech-badge">AI/ML</div>
+        <div class="tech-badge">Robotics</div>
+        <div class="tech-badge">IoT</div>
+        <div class="tech-badge">Cloud</div>
+        <div class="tech-badge">Full Stack</div>
+    </div>
+</section>
+
+<!-- Main Resume Content -->
+<div class="resume-container">
+    <!-- Left Column -->
+    <div class="resume-left">
+        <!-- Experience Section -->
+        <section class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-code-slash section-icon"></i>
+                <h2 class="section-title">Professional Journey</h2>
+            </div>
+            @*
+            <div class="experience-timeline">
+                @foreach (var exp in Model.ResumeData.Experiences.OrderByDescending(e => e.EndDate))
+                {
+                    <div class="timeline-item">
+                        <div class="timeline-marker">
+                            <div class="marker-dot"></div>
+                            <div class="marker-line"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-position">@exp.Name</h3>
+                            <div class="timeline-date">
+                                @exp.StartDate.ToString("MMM yyyy") - @exp.EndDate.ToString("MMM yyyy")
+                            </div>
+                            <div class="timeline-description">
+                                @Html.Raw(exp.Description.Replace("\n", "<br/><br/>"))
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+        </section>
+
+        <!-- Projects Highlight -->
+        <section class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-lightbulb section-icon"></i>
+                <h2 class="section-title">Key Projects</h2>
+            </div>
+            <div class="project-highlights">
+                <div class="project-card">
+                    <h3 class="project-title">Autonomous Navigation System</h3>
+                    <p class="project-description">Developed ROS-based navigation for indoor robots using LIDAR and computer vision</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ROS</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">OpenCV</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Smart Home IoT Hub</h3>
+                    <p class="project-description">Created a centralized control system for IoT devices with edge computing capabilities</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Raspberry Pi</span>
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">Node.js</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Right Column -->
+    <div class="resume-right">
+        <!-- Education Section -->
+        <section class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-mortarboard section-icon"></i>
+                <h2 class="section-title">Education</h2>
+            </div>
+            @*
+            @foreach (var qual in Model.ResumeData.Qualifications.OrderByDescending(q => q.EndDate))
+            {
+                <div class="education-item">
+                    <h3 class="education-degree">@qual.Name</h3>
+                    <div class="education-meta">
+                        <span class="education-date">
+                            @qual.StartDate.ToString("yyyy") - @qual.EndDate.ToString("yyyy")
+                        </span>
+                        <span class="education-gpa">GPA: 3.8/4.0</span>
+                    </div>
+                    <div class="education-description">
+                        @qual.Description
+                    </div>
+                </div>
+            }
+            
+        </section>
+
+        <!-- Skills Section -->
+        <section class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-tools section-icon"></i>
+                <h2 class="section-title">Technical Arsenal</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4 class="skill-title">AI/ML</h4>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-name">TensorFlow</div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">PyTorch</div>
+                            <div class="skill-level" style="width: 75%"></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Computer Vision</div>
+                            <div class="skill-level" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h4 class="skill-title">Robotics</h4>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-name">ROS</div>
+                            <div class="skill-level" style="width: 78%"></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Arduino</div>
+                            <div class="skill-level" style="width: 90%"></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">Sensor Fusion</div>
+                            <div class="skill-level" style="width: 82%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="resume-section">
+            <div class="section-header">
+                <i class="bi bi-award section-icon"></i>
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            <div class="certifications-list">
+                <div class="certification-item">
+                    <div class="certification-badge">
+                        <i class="bi bi-patch-check-fill"></i>
+                    </div>
+                    <div class="certification-details">
+                        <h4>Microsoft Certified: Azure AI Engineer</h4>
+                        <span class="certification-date">2024</span>
+                    </div>
+                </div>
+                <div class="certification-item">
+                    <div class="certification-badge">
+                        <i class="bi bi-patch-check-fill"></i>
+                    </div>
+                    <div class="certification-details">
+                        <h4>ROS Professional Developer</h4>
+                        <span class="certification-date">2023</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- Problem Solver Statement -->
+<section class="problem-solver">
+    <div class="container">
+        <div class="solver-content">
+            <i class="bi bi-code-square solver-icon"></i>
+            <div class="solver-text">
+                <h3>Challenge Accepted</h3>
+                <p>I thrive on complex technical problems that require innovative thinking and multidisciplinary solutions. Every challenge is an opportunity to grow and push boundaries.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    /* ===== Base Styles ===== */
+    :root {
+        --primary: #6a11cb;
+        --secondary: #2575fc;
+        --dark: #121212;
+        --light: #f8f9fa;
+        --text: #333333;
+        --text-light: #6c757d;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background-color: #f5f7fa;
+    }
+
+    /* ===== Typography ===== */
+    h1, h2, h3, h4 {
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        /*-webkit-background-clip: text;
+        background-clip: text;*/
+        color: transparent;
+    }
+
+    /* ===== Hero Section ===== */
+    .resume-hero {
+        background: linear-gradient(135deg, var(--dark), #1a1a2e);
+        color: white;
+        padding: 4rem 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .resume-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.05"><path fill="%23ffffff" d="M40,-57.1C50.5,-48.5,56.9,-34,63.2,-18.9C69.5,-3.8,75.6,11.9,70.8,24.5C66,37.1,50.2,46.6,34.1,55.1C18,63.6,1.6,71.1,-13.4,68.3C-28.4,65.5,-41.9,52.4,-52.7,37.6C-63.5,22.8,-71.5,6.3,-70.3,-10.8C-69.1,-27.9,-58.7,-45.6,-43.9,-54.3C-29.1,-63,-10,-62.7,6.6,-70.8C23.2,-78.9,29.6,-95.4,40,-57.1Z"/></svg>');
+            background-size: cover;
+        }
+
+    .hero-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        color: rgba(255,255,255,0.9);
+    }
+
+    .hero-description {
+        font-size: 1.1rem;
+        max-width: 600px;
+        color: rgba(255,255,255,0.8);
+    }
+
+    .hero-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .contact-link:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+    .hero-tech-stack {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .tech-badge {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+
+        .tech-badge:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+    /* ===== Resume Container ===== */
+    .resume-container {
+        max-width: 1200px;
+        margin: -50px auto 3rem auto;
+        display: grid;
+        grid-template-columns: 1fr 350px;
+        gap: 2rem;
+        position: relative;
+        z-index: 3;
+        padding: 0 1rem;
+    }
+
+    .resume-left {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        padding: 2rem;
+    }
+
+    .resume-right {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* ===== Section Styles ===== */
+    .resume-section {
+        margin-bottom: 3rem;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .section-icon {
+        font-size: 1.5rem;
+        color: var(--primary);
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    /* ===== Timeline ===== */
+    .experience-timeline {
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-bottom: 2rem;
+    }
+
+    .timeline-marker {
+        position: absolute;
+        left: -30px;
+        top: 5px;
+        height: calc(100% - 10px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .marker-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid var(--primary);
+        z-index: 2;
+    }
+
+    .marker-line {
+        flex: 1;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        margin-top: 5px;
+    }
+
+    .timeline-content {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .timeline-position {
+        font-size: 1.2rem;
+        margin-bottom: 0.25rem;
+        color: var(--dark);
+    }
+
+    .timeline-date {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        margin-bottom: 1rem;
+        font-weight: 500;
+    }
+
+    .timeline-description {
+        color: var(--text);
+        margin-bottom: 1rem;
+    }
+
+    .timeline-tech {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .tech-tag {
+        background: rgba(106, 17, 203, 0.1);
+        color: var(--primary);
+        padding: 0.25rem 0.75rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    /* ===== Project Cards ===== */
+    .project-highlights {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .project-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        border-left: 3px solid var(--primary);
+        transition: all 0.3s ease;
+    }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+    .project-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+
+    .project-description {
+        color: var(--text-light);
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+    }
+
+    /* ===== Education Section ===== */
+    .education-item {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .education-degree {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+        color: var(--dark);
+    }
+
+    .education-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-light);
+    }
+
+    .education-description {
+        color: var(--text);
+        font-size: 0.95rem;
+    }
+
+    /* ===== Skills Section ===== */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .skill-category {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .skill-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+    }
+
+    .skill-items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .skill-item {
+        margin-bottom: 0.5rem;
+    }
+
+    .skill-name {
+        font-size: 0.9rem;
+        margin-bottom: 0.25rem;
+        color: var(--text);
+    }
+
+    .skill-bar {
+        height: 6px;
+        background: rgba(0,0,0,0.05);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    .skill-level {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 3px;
+    }
+
+    /* ===== Certifications ===== */
+    .certifications-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .certification-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .certification-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .certification-details {
+        flex: 1;
+    }
+
+        .certification-details h4 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+    .certification-date {
+        font-size: 0.8rem;
+        color: var(--text-light);
+    }
+
+    /* ===== Problem Solver Section ===== */
+    .problem-solver {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 3rem 1rem;
+        margin-top: 3rem;
+    }
+
+    .solver-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .solver-icon {
+        font-size: 3rem;
+        opacity: 0.8;
+    }
+
+    .solver-text h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .solver-text p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        max-width: 800px;
+    }
+
+    /* ===== Responsive Design ===== */
+    @@media (max-width: 992px) {
+        .resume-container
+
+    {
+        grid-template-columns: 1fr;
+        margin-top: -30px;
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-contact {
+        align-items: center;
+    }
+
+    .hero-tech-stack {
+        justify-content: center;
+    }
+
+    }
+
+   @@media (max-width: 768px) {
+        .hero-title
+
+    {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .solver-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    }
+
+    /* ===== Dark Mode ===== */
+    .dark-mode {
+        background-color: var(--dark);
+        color: #e0e0e0;
+    }
+
+        .dark-mode .resume-left,
+        .dark-mode .resume-right,
+        .dark-mode .education-item,
+        .dark-mode .skill-category,
+        .dark-mode .certification-item,
+        .dark-mode .timeline-content,
+        .dark-mode .project-card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .dark-mode .section-title,
+        .dark-mode .timeline-position,
+        .dark-mode .project-title,
+        .dark-mode .education-degree,
+        .dark-mode .skill-title {
+            color: #ffffff;
+        }
+
+        .dark-mode .timeline-date,
+        .dark-mode .project-description,
+        .dark-mode .education-meta,
+        .dark-mode .certification-date {
+            color: #b0b0b0;
+        }
+
+        .dark-mode .section-header {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        .dark-mode .tech-tag {
+            background: rgba(106, 17, 203, 0.2);
+            color: #c792ea;
+        }
+</style>
+
+
+@*
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="hero-section text-center">
+        <h1>Hi, I'm <span class="highlight">Omphulusa Mashau</span> 👨‍💻</h1>
+        <h2 class="subheading">Building innovative solutions through code & creativity</h2>
+        <p class="lead">Passionate about solving complex challenges in the tech industry using modern software development techniques.</p>
+        <a href="/Resume" class="btn btn-warning mt-3">📄 View My Resume</a>
+    </div>
+
+    <!-- About Me -->
+    <div class="about-section mt-5">
+        <h2 class="text-primary">🧐 About Me</h2>
+        <p>I am a **software developer** based in **Polokwane, South Africa**, specializing in **C#, ASP.NET, SQL, and Supabase**. My passion lies in **building scalable software solutions** and **learning new technologies to solve real-world problems**.</p>
+        <p><strong>Current Focus:</strong> Implementing database-driven applications, optimizing performance, and enhancing user experience.</p>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="tech-stack mt-5">
+        <h2 class="text-success">💡 Tech Stack</h2>
+        <div class="d-flex flex-wrap">
+            <span class="badge bg-info">C#</span>
+            <span class="badge bg-info">ASP.NET</span>
+            <span class="badge bg-info">SQL</span>
+            <span class="badge bg-info">Supabase</span>
+            <span class="badge bg-info">Razor Pages</span>
+            <span class="badge bg-info">Bootstrap</span>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-section mt-5">
+        <h2 class="text-danger">📬 Get In Touch</h2>
+        <p>Let's collaborate or discuss new ideas! Feel free to reach out.</p>
+        <a href="mailto:omphu.shau@outlook.com" class="btn btn-warning">Send Me an Email</a>
+    </div>
+</div>
+
+<style>
+    .hero-section {
+        background-color: #222;
+        color: white;
+        padding: 50px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 4px 15px rgba(255, 204, 0, 0.3);
+    }
+
+    .highlight {
+        color: #ffc107;
+    }
+
+    .subheading {
+        font-size: 1.8rem;
+        color: #ffc107;
+    }
+
+    .project-card {
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.2);
+    }
+
+    .project-image {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .btn-warning:hover {
+        background-color: #000;
+        color: #ffc107;
+    }
+
+</style>
+*@
+
+@*
+<section class="home">
+    <div class="home-content">
+        <h1>Solution driven.</h1>
+        <h3>Bring on the challenge</h3>
+        <p>Long message about yourself here!!</p>
+        <a href="#" class="btn">Explore my projects.</a>
+    </div>
+
+    <div class="home-img">
+        <div class="rhombus">
+            <canvas id="matrix"></canvas>
+        </div>
+    </div>
+
+    <!--<div class="rhombus2"> </div>-->
+</section>
+*@

@@ -1,0 +1,255 @@
+﻿@model IEnumerable<Porfolio.ViewModels.ProjectViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4 project-header">My Projects</h1>
+    <div class="row g-4">
+        @foreach (var projectVM in Model)
+        {
+            <div class="col-md-6">
+                <div class="project-card p-4">
+
+                    <!-- Image Slider -->
+                    @if(@projectVM.ProjectImages.Any())
+                    {
+                        <div id="carousel-@projectVM.ProjectInstance.Id" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner h-auto">
+                                @foreach (var image in projectVM.ProjectImages)
+                                {
+                                    <div class="carousel-item @(image == projectVM.ProjectImages.First() ? "active" : "")">
+                                        <img src="@image.File" class="d-block w-100" onclick="showFullView('@image.File')">
+                                    </div>
+                                }
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@projectVM.ProjectInstance.Id" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-@projectVM.ProjectInstance.Id" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img id="modalImage" src="" class="img-fluid" height="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                    <!-- Project Details -->
+                    <div class="mt-3 row g-4">
+                        <h5>@projectVM.ProjectInstance.Name</h5>
+
+                        <!-- Collapsible Project Description -->
+                        <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#desc-@projectVM.ProjectInstance.Id">
+                            View Description
+                        </button>
+                        <div id="desc-@projectVM.ProjectInstance.Id" class="collapse mt-2">
+                            <p class="card-text">@projectVM.ProjectInstance.Description</p>
+                        </div>
+
+                        <div class="d-flex flex-wrap">
+                            @foreach (var tech in projectVM.ProjectInstance.TechnologyStack.Split(", ").ToList())
+                            {
+                                <span class="badge bg-info me-1">@tech</span>
+                            }
+                        </div>
+
+                        <!-- GitHub Link -->
+                        @if (projectVM.ProjectInstance.GithubUrl is not null)
+                        {
+                            <div class="mt-3">
+                                <a href="@projectVM.ProjectInstance.GithubUrl" target="_blank" class="btn btn-warning btn-sm w-100">
+                                    <i class="bi bi-github"></i> View on GitHub
+                                </a>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<style>
+    .project-card {
+        background-color: #222;
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.2);
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: #000;
+        border: 2px solid #ffc107;
+    }
+
+        .btn-warning:hover {
+            background-color: #000;
+            color: #ffc107;
+        }
+
+    .project-header {
+        font-size: 2.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #ffc107; /* Golden yellow */
+        text-shadow: 3px 3px 10px rgba(255, 204, 0, 0.5); /* Soft glow effect */
+        padding-bottom: 10px;
+        border-bottom: 3px solid #ffc107;
+        margin-bottom: 20px; /* Adds spacing below each card */
+        padding: 20px;
+    }
+
+</style>
+<script>
+    function showFullView(imageSrc) {
+        document.getElementById("modalImage").src = imageSrc;
+        new bootstrap.Modal(document.getElementById('imageModal')).show();
+    }
+</script>
+
+@*
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var project in Model)
+        {
+            <div class="col">
+                <div class="card shadow-lg border-0">
+
+                    <!-- Project Images -->
+
+                    <div id="carousel-@project.ProjectInstance.Id" class="carousel slide mt-3" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach (var image in project.ProjectImages)
+                            {
+                                <div class="carousel-item @(image == project.ProjectImages.First() ? "active" : "")">
+                                    <img src="images/varsity_plug.jpg" class="d-block w-100">
+                                </div>
+                            }
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-@project.ProjectInstance.Id" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-@project.ProjectInstance.Id" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@project.ProjectInstance.Name</h5>
+
+                        <!-- Collapsible Project Description -->
+                        <button class="btn btn-outline-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#desc-@project.ProjectInstance.Id">
+                            View Description
+                        </button>
+                        <div id="desc-@project.ProjectInstance.Id" class="collapse mt-2">
+                            <p class="card-text">@project.ProjectInstance.Description</p>
+                        </div>
+
+                        <!-- GitHub Link -->
+                        <a asp-page="@project.ProjectInstance.GithubUrl" target="_blank" class="btn btn-sm btn-outline-dark">
+                            <i class="bi bi-github"></i> View on GitHub
+                        </a>
+
+                        <!-- Technology Stack -->
+                        <div class="d-flex flex-wrap justify-content-center mt-3">
+                            @foreach (var tech in project.ProjectInstance.TechnologyStack.Split(", ").ToList())
+                            {
+                                <span class="badge rounded-pill bg-primary me-1">@tech</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@*
+<div class="container mt-5">
+
+    <!--
+    <div class="mb-4">
+        <a asp-area"" asp-controller="Projects" asp-action="Create" class="btn btn-success">➕ Add New Project</a>
+    </div>
+    -->
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach (var project in Model)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">@project.Name</h3>
+                        <p class="card-text">@project.Description</p>
+
+                        <div class="mb-3">
+                            @foreach (var tech in project.TechnologyStack.Split(", ").ToList())
+                            {
+                                <span class="badge bg-primary me-1">@tech</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a asp-page="@project.GithubUrl" target="_blank" class="btn btn-sm btn-outline-dark">
+                            <i class="bi bi-github"></i> View on GitHub
+                        </a>
+                        <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-sm btn-info">
+                            <i class="bi bi-info"></i> Details
+                        </a>
+                    </div>
+                    <!--
+                    <div class="card-footer bg-transparent">
+                        <a asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-sm btn-info">Details</a>
+                        <a asp-controller="Projects" asp-action="Edit" asp-route-id="@project.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-controller="Projects" asp-action="Delete" asp-route-id="@project.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div class="section-body">
+                <div class="row-card">
+                    <div class="culumn-card">
+                        <div class="image-realm">
+                            <img src="https://cdn.pixabay.com/photo/2017/01/20/15/12/oranges-1995079_960_720.jpg">
+                        </div>
+                        <h1>@project.Name</h1>
+                        <a class="button-buy" asp-controller="Projects" asp-action="Details" asp-route-id="@project.Id" class="btn btn-sm btn-info">Details</a>
+                        <div class="mb-3">
+                            @foreach (var tech in project.TechnologyStack.Split(", ").ToList())
+                            {
+                                <span class="badge bg-primary me-1">@tech</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+*@

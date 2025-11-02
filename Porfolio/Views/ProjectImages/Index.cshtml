@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Porfolio.Models.ProjectImage>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="sliders-container">
+    <div class="memory-slider">
+        <h2 class="slider-header">Testing</h2>
+        <p class="slider-message"></p>
+        <div class="slider-wrapper">
+            <div class="slider">
+                @foreach (var img in Model)
+                {
+                    <div class="slide">
+                        <img src="@img.File" alt="@img.File" />
+                    </div>
+                }
+            </div>
+            <button class="slider-nav prev">❮</button>
+            <button class="slider-nav next">❯</button>
+        </div>
+    </div>
+</div>
+
